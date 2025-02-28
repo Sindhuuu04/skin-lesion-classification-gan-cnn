@@ -1,70 +1,127 @@
-# Generative AI Empowered Skin Cancer Diagnosis: A Classification through Deep Learning
+# Skin-Cancer-Classification
 
-This project focuses on skin lesion classification using deep learning techniques, specifically Generative Adversarial Networks (GANs) for synthetic data augmentation and Convolutional Neural Networks (CNNs) for classification. The objective is to enhance diagnostic accuracy by increasing the diversity and volume of training data through synthetic image generation.
+The primary goal of this work is to build up a Model of Skin Cancer Detection System utilizing Machine Learning Algorithms. After experimenting with many different architectures for the CNN model It is found that adding the BatchNormalization layer after each Dense, and MaxPooling2D layer can help increase the validation accuracy. In future, a mobile application can be made.
 
-## Introduction
-Skin cancer is one of the most common forms of cancer, and early detection is crucial for effective treatment. This project aims to build a robust skin lesion classification system by combining the power of GANs for synthetic image generation and CNNs for accurate classification.
+Play with Skin Cancer Images here: (https://skin-cancer-detection-cnn.herokuapp.com/)
 
-## Features
-- **Synthetic Data Generation**: Using GAN to create additional data from limited datasets.
-- **CNN-based Classification**: A deep learning model trained to classify skin lesions into categories such as benign and malignant.
-- **Data Augmentation**: Enhance the dataset by applying transformations and synthetic image generation.
-- **Exploratory Data Analysis (EDA)**: Analyze the dataset with visualizations and insights.
-- **Performance Evaluation**: Accuracy, precision, recall, and F1-score metrics for evaluating the model.
+## Model Architecture:
 
-## Dataset
-We use the **HMNIST 28x28 RGB dataset** for skin lesion classification. The original dataset is augmented with synthetic images generated using GAN to increase the training data diversity.
+![alt_text](https://github.com/charanhu/Skin-Cancer-Detection-MNIST/blob/main/model_architecture.png)
 
-- **Original Dataset**: [Kaggle - hmnist_28_28_RGB.csv](https://www.kaggle.com/kmader/skin-cancer-mnist-ham10000)
-- **Generated Data**: 1000 synthetic images generated using GAN over 200 epochs.
+## Data
 
-## Model Architecture
-- **Generative Adversarial Network (GAN)**: Used for synthetic data generation.
-- **Convolutional Neural Network (CNN)**: Used for the classification of skin lesions.
+https://www.kaggle.com/kmader/skin-cancer-mnist-ham10000
 
-## Installation
 
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/yourusername/synthetic-data-skin-lesion-classification.git
-    cd synthetic-data-skin-lesion-classification
-    ```
+## How to Run the App:
 
-2. Install the necessary dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
+## Method1
+•Run the app.py file
 
-3. Set up your environment (e.g., Jupyter Notebook or Google Colab).
+•Go to http://localhost:5000/ on your browser
 
-## Usage
+•Use the Upload and button to browse and upload the image you want
 
-1. **Data Preprocessing**:
-    - Load the dataset and preprocess it for training the GAN and CNN models.
+•Hit submit to get the results.
 
-2. **Training the GAN**:
-    - Train the GAN model to generate synthetic skin lesion images.
-    ```bash
-    python train_gan.py
-    ```
+## Method 2
+•Depploy it to Azure Webapp or Heroku App through github repository
 
-3. **Training the CNN**:
-    - Train the CNN model using the augmented dataset (original + synthetic data).
-    ```bash
-    python train_cnn.py
-    ```
+•Go to url generated after deployment on your browser
 
-4. **Testing the Model**:
-    - Evaluate the performance of the model on the test dataset.
-    ```bash
-    python evaluate.py
-    ```
+•Use the Upload and button to browse and upload the image you want
 
-5. **Visualization**:
-    - View results of the classification and generated images.
-    ```bash
-    python visualize_results.py
-    ```
+•Hit submit to get the results.
 
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+
+## Libraries Used: 
+
+• numpy
+
+• keras
+
+• tensorflow-cpu==2.5.0
+
+• pandas
+
+• matplotlib
+
+• pillow
+
+• flask
+
+• seaborn
+
+• gunicorn
+
+## Skin_Cancer_Detection.ipynb:
+This is the Jupyter notebook used to define and train the model.
+
+## app.py:
+This is the flask app that needs to run in order to use the webapp
+
+## skin_cancer_detection.py:
+This contains the definition of the CNN model.
+
+## best_model.h5:
+Contains the weights of the best model.
+
+## CNN model summary:
+
+```python
+Model: "sequential"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d (Conv2D)              (None, 28, 28, 16)        448       
+_________________________________________________________________
+max_pooling2d (MaxPooling2D) (None, 14, 14, 16)        0         
+_________________________________________________________________
+batch_normalization (BatchNo (None, 14, 14, 16)        64        
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 12, 12, 32)        4640      
+_________________________________________________________________
+conv2d_2 (Conv2D)            (None, 10, 10, 64)        18496     
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 5, 5, 64)          0         
+_________________________________________________________________
+batch_normalization_1 (Batch (None, 5, 5, 64)          256       
+_________________________________________________________________
+conv2d_3 (Conv2D)            (None, 3, 3, 128)         73856     
+_________________________________________________________________
+conv2d_4 (Conv2D)            (None, 1, 1, 256)         295168    
+_________________________________________________________________
+flatten (Flatten)            (None, 256)               0         
+_________________________________________________________________
+dropout (Dropout)            (None, 256)               0         
+_________________________________________________________________
+dense (Dense)                (None, 256)               65792     
+_________________________________________________________________
+batch_normalization_2 (Batch (None, 256)               1024      
+_________________________________________________________________
+dropout_1 (Dropout)          (None, 256)               0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 128)               32896     
+_________________________________________________________________
+batch_normalization_3 (Batch (None, 128)               512       
+_________________________________________________________________
+dense_2 (Dense)              (None, 64)                8256      
+_________________________________________________________________
+batch_normalization_4 (Batch (None, 64)                256       
+_________________________________________________________________
+dropout_2 (Dropout)          (None, 64)                0         
+_________________________________________________________________
+dense_3 (Dense)              (None, 32)                2080      
+_________________________________________________________________
+batch_normalization_5 (Batch (None, 32)                128       
+_________________________________________________________________
+dense_4 (Dense)              (None, 7)                 231       
+=================================================================
+Total params: 504,103
+Trainable params: 502,983
+Non-trainable params: 1,120
+_________________________________________________________________
+```
+
+
